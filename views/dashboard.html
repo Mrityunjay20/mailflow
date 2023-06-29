@@ -1,12 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+  <title>Email Paraphrasing Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    .button.primary {
+      background-color: #28a745;
+    }
+
+    .button.primary:hover {
+      background-color: #1e7e34;
+    }
+  </style>
 </head>
 <body>
-    <hi>this is dashboard page</hi>
+  <div class="container">
+    <h1>Email Paraphrasing Dashboard</h1>
+
+    <div class="card">
+      <h2>Paraphrase an Email</h2>
+      <p>Use the form below to paraphrase an email:</p>
+      <form>
+        <textarea name="emailContent" rows="10" cols="50" placeholder="Enter your email content"></textarea>
+        <br>
+        <button class="button primary" type="submit">Paraphrase</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Recent Paraphrased Emails</h2>
+      <ul>
+        <li>Email 1</li>
+        <li>Email 2</li>
+        <li>Email 3</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Account Settings</h2>
+      <p>Manage your account settings:</p>
+      <ul>
+        <li><a href="#">Change Password</a></li>
+        <li><a href="#">Update Email</a></li>
+        <li><a href="#">Billing Information</a></li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
