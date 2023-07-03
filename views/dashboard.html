@@ -58,10 +58,16 @@
     <div class="card">
       <h2>Paraphrase an Email</h2>
       <p>Use the form below to paraphrase an email:</p>
-      <form>
+      <form action="/resemail" method="post">
         <textarea name="emailContent" rows="10" cols="50" placeholder="Enter your email content"></textarea>
         <br>
-        <button class="button primary" type="submit">Paraphrase</button>
+        
+        <br>
+        <label for="emailContent">emailContext </label><br>
+        <br>
+        <textarea name="emailContext" rows="1" cols="50" placeholder="Enter your context"></textarea>
+        <br>
+        <button onclick="Submit">Submit</button>
       </form>
     </div>
 

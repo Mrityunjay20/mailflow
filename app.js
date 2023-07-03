@@ -4,21 +4,31 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Session = require('express-sessions');
-const sessionm = Session();
+const CookieSession = require('cookie-session');
+const jwt = require('jsonwebtoken');
 
 
 const authRouters = require('./routes/authRoute')
 const profileRoutes = require('./routes/profile');
+const cookieSession = require('cookie-session');
 
+app.set('trust-proxy',true);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(authRouters);
-app.use(profileRoutes);
+app.use(express.json());
 app.use(
-    sessionm({secret:'asdfghjkgfdx',
-        resave: true,
-        saveUninitialized: true})
+    cookieSession({
+        signed:false,
+        secure:true,
+    })
 );
+
+app.use(profileRoutes);
+// app.use(
+//     CookieSession({secret:'asdfghjkgfdx',
+//         resave: true,
+//         saveUninitialized: true})
+// );
 // saveUninitialized session will not be saved on every request but only when there is a change in session.
 
 const dbName = 'Trackpe';
@@ -33,4 +43,3 @@ mongoose.connect(url,{ dbName, useNewUrlParser: true, useUnifiedTopology: true }
 app.use((req,res,next)=>{
     res.status(404).sendFile(path.join(__dirname,'views','404.html'));
 })
-// fix session dependency

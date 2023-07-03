@@ -1,14 +1,19 @@
+const body = require('body-parser');
 const express = require('express');
 const router = express.Router();
 const path = require('path');
 const postSignup = require('../controller/userAuth');
+const jwt = require('jsonwebtoken');
+
+// const isValid = require('../middleware/apikeycheck');
+
+
 router.get('/',(req,res)=>{
-    res.send("router works");
+    res.send('home page');
 });
 
 router.get('/signin',(req,res)=>{
     res.status(200).sendFile(path.join(__dirname,'..','views','signin.html'))
-    console.log(req.get('Cookie'));
 })
 
 router.get('/signup',(req,res)=>{
@@ -18,6 +23,8 @@ router.get('/signup',(req,res)=>{
 router.post("/signup", postSignup.postAddUser);
 
 router.post('/signin', postSignup.postUserLogin);
+
+// router.get('/api_test',postSignup.post_apitest);
 
 module.exports = router;
 
