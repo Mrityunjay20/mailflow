@@ -48,18 +48,11 @@ exports.postUserLogin = async (req,res)=>{
                 res.redirect('/wrongPassword');
                 }
         });
+    }else{
+        console.log("wrong email");
+        res.redirect('/signin');
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -36,7 +36,7 @@ async function main(mailbody,mailtone) {
       messages: [{ content: mailbody}],
     },
   });
-
+  console.log(result[0].candidates[1].content)
   return (result[0].candidates[0].content);
 }
 
