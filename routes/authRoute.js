@@ -8,13 +8,13 @@ const jwt = require('jsonwebtoken');
 // const isValid = require('../middleware/apikeycheck');
 
 
-router.get('/',(req,res)=>{
-    res.send('home page');
-});
+// router.get('/',(req,res)=>{
+//     res.send('home page');
+// });
 
-router.get('/signin',(req,res)=>{
-    res.status(200).sendFile(path.join(__dirname,'..','views','signin.html'))
-})
+// router.get('/signin',(req,res)=>{
+//     res.status(200).sendFile(path.join(__dirname,'..','views','signin.html'))
+// })
 
 router.get('/signup',(req,res)=>{
     res.status(200).sendFile(path.join(__dirname,'..','views','signup.html'))

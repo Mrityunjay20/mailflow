@@ -5,12 +5,15 @@ const path = require('path');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const CookieSession = require('cookie-session');
-const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 const authRouters = require('./routes/authRoute')
 const profileRoutes = require('./routes/profile');
 const cookieSession = require('cookie-session');
+const cors = require('cors');
+
+
+
 
 app.set('trust-proxy',true);
 app.use(bodyParser.urlencoded({extended:true}));
@@ -21,11 +24,16 @@ app.use(express.json());
 
 app.use(passport.initialize());
 require('./middleware/passport')
+app.use(cors());
+
+
+
+
 
 const dbName = 'MailFlow';
 const url = process.env.MONGO_URL;
 mongoose.connect(url,{ dbName, useNewUrlParser: true, useUnifiedTopology: true }).then(result=>{
-    app.listen(3000)
+    app.listen(4000)
 }).catch(err=>{
     console.log(err);
 });

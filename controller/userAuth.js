@@ -1,9 +1,14 @@
 const userProfiles = require('../model/userProfiles')
-const body = require('body-parser');
+const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const { json } = require('body-parser');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
+const express = require('express');
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 exports.postAddUser = async (req,res) =>{
@@ -37,30 +42,35 @@ exports.postAddUser = async (req,res) =>{
 };
 
 exports.postUserLogin = async (req,res)=>{
+    
     const Usremail = req.body.email;
     const Usrpassword = req.body.password;
     const lemail = await userProfiles.findOne({email: Usremail});
     const secretOrPrivateKey = process.env.JWT_KEY;
+
+    
+
     if(lemail !== null ){
         const payload = {
             user_email: Usremail,
             id: lemail._id
         }
+        
         bcrypt.compare(Usrpassword, lemail.password, (err,result)=>{
             if(result === true){
 
                 //jwt token create
-                const token = jwt.sign(payload, secretOrPrivateKey, {expiresIn: "1d"});         
-                return res.status(200).cookie('jwtToken', token, {
+                const token = jwt.sign(payload, secretOrPrivateKey, {expiresIn: "1d"});    
+                res.status(200).cookie('jwtToken', token, {
                     httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
                     secure: true, // Cookie can only be sent over HTTPS (requires SSL/TLS)
                     sameSite: 'strict', // Cookie is not sent in cross-site requests
                   });
-                // return res.status(200).send({
-                //     success:true,
-                //     message:"logged in successfully",
-                //     token:"Bearer "+ token
-                // })
+                return res.status(200).send({
+                    success:true,
+                    message:"logged in successfully",
+                    token:"Bearer "+ token
+                })
                 
                 
             }else{
