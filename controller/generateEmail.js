@@ -16,7 +16,7 @@ async function main(mailbody,mailtone) {
   const result = await client.generateMessage({
     model: MODEL_NAME, // Required. The model to use to generate the result.
     temperature: 0.5, // Optional. Value `0.0` always uses the highest-probability result.
-    candidateCount: 2, // Optional. The number of candidate results to generate.
+    candidateCount: 1, // Optional. The number of candidate results to generate.
     prompt: {
       // optional, preamble context to prime responses
       context: `paraphrase the below text into a formal email and in a ${mailtone} tone`,
@@ -36,14 +36,13 @@ async function main(mailbody,mailtone) {
       messages: [{ content: mailbody}],
     },
   });
-  console.log(result[0].candidates[1].content)
   return (result[0].candidates[0].content);
 }
 
 // main();
 
 
-exports.makeemail =async (req,res)=>{ 
+exports.makeemail = async (req,res)=>{ 
     console.log("hello makememail " + req.body.emailContent +" "+ req.body.emailContext);
     const paramail = await main(req.body.emailContent, req.body.emailContext);
     // String(paramail);

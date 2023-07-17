@@ -7,17 +7,36 @@ const userSchema = new Schema({
         type:String,
         required:true
     },
-    phone:{
-        type:Number
-    },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     password:{
         type:String,
         required:true
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    numDrafts:{
+        type:Number,
+        default:0
+    },
+    readEmailPermission:{
+        type:Boolean,
+        default:false
+    },
+    hasPaid:{
+        type:Boolean,
+        default:false
+    },
+    isBlocked:{
+        type:Boolean,
+        default:false
+    }
+
 })
 
 module.exports = mongoose.model("Users",userSchema);
