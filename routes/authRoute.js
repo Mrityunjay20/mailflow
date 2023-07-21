@@ -20,6 +20,10 @@ router.get('/signup',(req,res)=>{
     res.status(200).sendFile(path.join(__dirname,'..','views','signup.html'))
 })
 
+router.get('/signin',(req,res)=>{
+    res.status(200).sendFile(path.join(__dirname,'..','views','signin.html'))
+})
+
 router.post("/signup", postSignup.postAddUser);
 
 router.post('/signin', postSignup.postUserLogin);

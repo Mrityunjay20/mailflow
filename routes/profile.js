@@ -11,7 +11,7 @@ const passport = require('passport');
 //     res.status(200).sendFile(path.join(__dirname,'..','views','dashboard.html'))
 // })
 
-router.get('/dashboard', function(req, res, next) {
+router.post('/dashboard', function(req, res, next) {
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
       if (err) { return next(err) }
       if (!user) { return res.status(401).redirect('/signin') }

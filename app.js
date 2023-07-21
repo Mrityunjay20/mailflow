@@ -35,11 +35,12 @@ mongoose.connect(url,{ dbName, useNewUrlParser: true, useUnifiedTopology: true }
 });
 
 app.get('/tries',passport.authenticate('jwt',{session:false}), (req,res)=>{
+    console.log("tries");
     res.send(req.body);
 });
 
 app.get('/hello',(req,res)=>{
-    console.log('tried');
+    console.log('hello');
     res.send('return hello');
 })
 

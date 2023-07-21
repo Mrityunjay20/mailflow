@@ -39,15 +39,18 @@ exports.postAddUser = async (req,res) =>{
         });
     }
     
-};
+}
+
+
+
 
 exports.postUserLogin = async (req,res)=>{
     
-    const Usremail = req.body.email;
-    const Usrpassword = req.body.password;
+    const Usremail = req.body.loginEmail;
+    const Usrpassword = req.body.loginPassword;
     const lemail = await userProfiles.findOne({email: Usremail});
     const secretOrPrivateKey = process.env.JWT_KEY;
-
+    console.log(req.body);
     
 
     if(lemail !== null ){
@@ -61,7 +64,7 @@ exports.postUserLogin = async (req,res)=>{
 
                 //jwt token create
                 const token = jwt.sign(payload, secretOrPrivateKey, {expiresIn: "1d"});    
-                res.status(200).cookie('jwtToken', token, {
+                res.status(201).cookie('Authorization', token, {
                     httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
                     secure: true, // Cookie can only be sent over HTTPS (requires SSL/TLS)
                     sameSite: 'strict', // Cookie is not sent in cross-site requests
@@ -70,7 +73,7 @@ exports.postUserLogin = async (req,res)=>{
                     success:true,
                     message:"logged in successfully",
                     token:"Bearer "+ token
-                })
+                });
                 
                 
             }else{
