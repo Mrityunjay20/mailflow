@@ -10,12 +10,14 @@ opts.secretOrKey = process.env.JWT_KEY;
 
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+    
     userProfiles.findOne({id: jwt_payload.sub}).then(function(user,err) {
         if (err) {
             console.log(err);
             return done(err, false);
         }
         if (user) {
+            console.log(JSON.stringify(jwt_payload)+"\n"+user);
             return done(null, user);
             
         } else {

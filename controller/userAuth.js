@@ -49,9 +49,7 @@ exports.postUserLogin = async (req,res)=>{
     const Usremail = req.body.loginEmail;
     const Usrpassword = req.body.loginPassword;
     const lemail = await userProfiles.findOne({email: Usremail});
-    const secretOrPrivateKey = process.env.JWT_KEY;
-    console.log(req.body);
-    
+    const secretOrPrivateKey = process.env.JWT_KEY;    
 
     if(lemail !== null ){
         const payload = {

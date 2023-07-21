@@ -39,10 +39,6 @@ app.get('/tries',passport.authenticate('jwt',{session:false}), (req,res)=>{
     res.send(req.body);
 });
 
-app.get('/hello',(req,res)=>{
-    console.log('hello');
-    res.send('return hello');
-})
 
 
 app.use((req,res,next)=>{
