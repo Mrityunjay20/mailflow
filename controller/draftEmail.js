@@ -4,7 +4,8 @@ const userProfiles = require('../model/userProfiles')
 
 
 exports.idDets = async (req,res)=>{
-    const findId = await userProfiles.findOne({email:"mjxworks@gmail.com"});
+    const usrEmail = req.body.userEmail;
+    const findId = await userProfiles.findOne({email:`${usrEmail}`});
     
 
     const femail = req.body.emailContent;
