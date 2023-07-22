@@ -7,6 +7,8 @@ const draftEmail = require('../controller/draftEmail');
 const { route } = require('./authRoute');
 const passport = require('passport');
 
+const apiKeyMiddleware = require('../middleware/apikeycheck');
+
 // router.get('/dashboard',(req,res)=>{
 //     res.status(200).sendFile(path.join(__dirname,'..','views','dashboard.html'))
 // })
@@ -21,12 +23,12 @@ router.post('/dashboard', function(req, res, next) {
   });
 
 
-router.post('/genemail', makeEmail.makeemail);
+router.post('/genemail', apiKeyMiddleware,makeEmail.makeemail);
 router.get('/finetest',(req,res)=>{
     res.sendFile(path.join(__dirname,'..','views','savedraft.html'));
 });
-router.post('/saveDraft', draftEmail.idDets);
-router.get('/saved',draftEmail.seemail);
+router.post('/saveDraft',apiKeyMiddleware, draftEmail.idDets);
+router.get('/saved',apiKeyMiddleware,draftEmail.seemail);
 
 
 module.exports = Router;
