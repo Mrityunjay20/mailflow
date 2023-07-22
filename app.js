@@ -4,12 +4,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config();
 const mongoose = require('mongoose');
-
-const passport = require('passport');
-
+const passport = require('passport')
 const authRouters = require('./routes/authRoute')
 const profileRoutes = require('./routes/profile');
-
 const cors = require('cors');
 
 
@@ -19,8 +16,6 @@ app.set('trust-proxy',true);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(authRouters);
 app.use(profileRoutes);
-
-
 
 app.use(passport.initialize());
 require('./middleware/passport')
@@ -34,10 +29,10 @@ mongoose.connect(url,{ dbName, useNewUrlParser: true, useUnifiedTopology: true }
     console.log(err);
 });
 
-app.get('/tries',passport.authenticate('jwt',{session:false}), (req,res)=>{
-    console.log("tries");
-    res.send(req.body);
-});
+// app.get('/tries',passport.authenticate('jwt',{session:false}), (req,res)=>{
+//     console.log("tries");
+//     res.send(req.body);
+// });
 
 
 

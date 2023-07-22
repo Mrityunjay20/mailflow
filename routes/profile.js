@@ -15,12 +15,13 @@ router.post('/dashboard', function(req, res, next) {
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
       if (err) { return next(err) }
       if (!user) { return res.status(401).redirect('/signin') }
-      else if(user){res.status(200).sendFile(path.join(__dirname,'..','views','dashboard.html'))}
+      // else if(user){res.status(200).sendFile(path.join(__dirname,'..','views','dashboard.html'))}
+      else if(user){res.status(200)}
     })(req, res, next);
   });
 
 
-router.post('/resemail', makeEmail.makeemail);
+router.post('/genemail', makeEmail.makeemail);
 router.get('/finetest',(req,res)=>{
     res.sendFile(path.join(__dirname,'..','views','savedraft.html'));
 });
