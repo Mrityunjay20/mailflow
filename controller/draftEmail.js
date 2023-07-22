@@ -28,6 +28,6 @@ exports.seemail = async(req,res)=>{
         { $match: { email:"mjxworks@gmail.com"} }
       ]);
       
-    res.send(draft);
+    res.status(200).send(draft);
     console.log(totaldrafts);
 }

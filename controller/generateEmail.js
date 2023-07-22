@@ -19,7 +19,7 @@ async function main(mailbody,mailtone) {
     candidateCount: 1, // Optional. The number of candidate results to generate.
     prompt: {
       // optional, preamble context to prime responses
-      context: `paraphrase the below text into a formal email and in a ${mailtone} tone`,
+      context: `paraphrase the below text into a business email and in a ${mailtone} tone`,
         // context: "write a movie script of 10 dialoges",
       // Optional. Examples for further fine-tuning of responses.
         //       examples: [
