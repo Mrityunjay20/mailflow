@@ -13,9 +13,8 @@ console.log(ExtractJwt.fromAuthHeaderAsBearerToken());
 opts.secretOrKey = process.env.JWT_KEY;
 
 
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    
-    userProfiles.findOne({id: jwt_payload.sub}).then(function(user,err) {
+passport.use(new JwtStrategy(opts,async function(jwt_payload, done) {    
+    userProfiles.findOne({_id: jwt_payload.id}).then(function(user,err) {
         if (err) {
             return done(err, false);
         }

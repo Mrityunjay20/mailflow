@@ -4,20 +4,26 @@ const userProfiles = require('../model/userProfiles')
 const passport = require('passport');
 
 
-exports.idDets = async (req,res,next)=>{
+exports.saveDraft = async (req,res,next)=>{
     async function saveDraft(user){
-        const finalDraft = new saveEmails({
+        console.log(user.email);
+        const numDraft = await saveEmails.count({email:user.email});
+        if(numDraft>5){
+            console.log("you can only save upto 5 mails");
+        }else{
+            const finalDraft = new saveEmails({
                 email: user.email,
+                draftTitle: req.body.title,
                 draftBody: req.body.draft,
                 UserDetails: user._id
-        });
-        await finalDraft.save().then(result=>{
+            });
+            await finalDraft.save().then(result=>{
                 console.log("draft saved");
                 res.send("itworkd");
-            }).catch(err=>{
+                 }).catch(err=>{
                 console.log(err);
             });
-    }
+        }};
 
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
         if (err) { return next(err) }
@@ -26,14 +32,15 @@ exports.idDets = async (req,res,next)=>{
       })(req, res, next);
 }
 
-exports.seemail = async(req,res)=>{
-    const draft = await saveEmails.find({email:"mjxworks@gmail.com"});
-    const totaldrafts = await saveEmails.count ([
-        { $match: { email:"mjxworks@gmail.com"} }
-      ]);
-      
-    res.status(200).send(draft);
-    console.log(totaldrafts);
+exports.seemail = async(req,res,next)=>{
+    async function seemail(user){
+        const retriveEmail = await saveEmails.find({email:user.email});
+        res.send(retriveEmail);
+    }
+    passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
+        if (err) { return next(err) }
+        if (!user) { return res.status(401).send("user not found")}
+        else if(user){seemail(user)}
+    })(req, res, next);
 }
 
-console.log("hello");

@@ -7,6 +7,10 @@ const DraftSchema = new Schema({
         type:String,
         required:true
     },
+    draftTitle:{
+        type:String,
+        required:true
+    },
     draftBody:{
         type:String,
         required:true
