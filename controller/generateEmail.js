@@ -15,11 +15,11 @@ const client = new DiscussServiceClient({
 async function main(mailbody,mailtone) {
   const result = await client.generateMessage({
     model: MODEL_NAME, // Required. The model to use to generate the result.
-    temperature: 0.5, // Optional. Value `0.0` always uses the highest-probability result.
+    temperature: 0.4, // Optional. Value `0.0` always uses the highest-probability result.
     candidateCount: 1, // Optional. The number of candidate results to generate.
     prompt: {
       // optional, preamble context to prime responses
-      context: `paraphrase the below text into a business email and in a ${mailtone} tone`,
+      context: `Write a formal email with its subject for the message content of 100 words and write it in a ${mailtone} tone`,
         // context: "write a movie script of 10 dialoges",
       // Optional. Examples for further fine-tuning of responses.
         //       examples: [
