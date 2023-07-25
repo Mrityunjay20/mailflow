@@ -1,6 +1,5 @@
 const express = require ('express');
-const router = require('./authRoute');
-const Router= express.Router();
+const router= express.Router();
 const path = require('path');
 const makeEmail = require('../controller/generateEmail');
 const draftEmail = require('../controller/draftEmail');
@@ -9,19 +8,15 @@ const passport = require('passport');
 
 const apiKeyMiddleware = require('../middleware/apikeycheck');
 
-// router.get('/dashboard',(req,res)=>{
-//     res.status(200).sendFile(path.join(__dirname,'..','views','dashboard.html'))
-// })
 
 router.post('/dashboard', function(req, res, next) {
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
+      console.log(user);
       if (err) { return next(err) }
       if (!user) { return res.status(401).redirect('/signin') }
-      // else if(user){res.status(200).sendFile(path.join(__dirname,'..','views','dashboard.html'))}
       else if(user){res.status(200)}
     })(req, res, next);
   });
-
 
 router.post('/genemail', apiKeyMiddleware,makeEmail.makeemail);
 router.get('/finetest',(req,res)=>{
@@ -31,4 +26,4 @@ router.post('/saveDraft',apiKeyMiddleware, draftEmail.idDets);
 router.get('/saved',apiKeyMiddleware,draftEmail.seemail);
 
 
-module.exports = Router;
+module.exports = router;
