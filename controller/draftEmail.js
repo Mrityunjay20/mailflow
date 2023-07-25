@@ -35,3 +35,5 @@ exports.seemail = async(req,res)=>{
     res.status(200).send(draft);
     console.log(totaldrafts);
 }
+
+console.log("hello");
