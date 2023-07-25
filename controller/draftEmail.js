@@ -4,18 +4,6 @@ const userProfiles = require('../model/userProfiles')
 const passport = require('passport');
 
 
-<<<<<<< HEAD
-exports.idDets = async (req,res)=>{
-    const usrEmail = req.body.userEmail;
-    const findId = await userProfiles.findOne({email:`${usrEmail}`});
-    
-
-    const femail = req.body.emailContent;
-    const finalDraft = new saveEmails({
-        email: "mjxworks@gmail.com",
-        draftBody: femail,
-        UserDetails: femail._id
-=======
 exports.idDets = async (req,res,next)=>{
     async function saveDraft(user){
         const finalDraft = new saveEmails({
@@ -29,7 +17,6 @@ exports.idDets = async (req,res,next)=>{
             }).catch(err=>{
                 console.log(err);
             });
->>>>>>> finalbranch
     }
 
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
