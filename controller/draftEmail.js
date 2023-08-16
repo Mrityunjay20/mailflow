@@ -38,6 +38,7 @@ exports.seemail = async(req,res,next)=>{
         res.send(retriveEmail);
     }
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
+        console.log(user);
         if (err) { return next(err) }
         if (!user) { return res.status(401).send("user not found")}
         else if(user){seemail(user)}

@@ -23,6 +23,7 @@ router.get('/finetest',(req,res)=>{
 });
 router.post('/saveDraft',apiKeyMiddleware, draftEmail.saveDraft);
 router.post('/fetchDraft',draftEmail.seemail);
+router.get('/seemail', draftEmail.seemail);
 
 
 module.exports = router;
