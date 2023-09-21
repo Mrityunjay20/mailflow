@@ -4,6 +4,7 @@ const router = express.Router();
 const path = require('path');
 const postSignup = require('../controller/userAuth');
 const jwt = require('jsonwebtoken');
+const getAuth = require('../controller/gmailAuth');
 
 
 const apiKeyMiddleware = require('../middleware/apikeycheck');
@@ -32,6 +33,7 @@ router.post("/signup",apiKeyMiddleware,postSignup.postAddUser);
 router.post('/signin',apiKeyMiddleware, postSignup.postUserLogin);
 
 // router.get('/api_test',postSignup.post_apitest);
+router.post('/findauth',getAuth.findAuth);
 
 module.exports = router;
 

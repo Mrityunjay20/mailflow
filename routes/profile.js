@@ -3,7 +3,6 @@ const router= express.Router();
 const path = require('path');
 const makeEmail = require('../controller/generateEmail');
 const draftEmail = require('../controller/draftEmail');
-const getAuth = require('../controller/gmailAuth');
 const { route } = require('./authRoute');
 const passport = require('passport');
 
@@ -27,6 +26,5 @@ router.post('/saveDraft',apiKeyMiddleware, draftEmail.saveDraft);
 router.get('/seemail',apiKeyMiddleware, draftEmail.seemail);
 
 
-router.post('/findauth',getAuth.findAuth);
 
 module.exports = router;
