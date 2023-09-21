@@ -43,7 +43,7 @@ async function main(mailbody,mailtone, mailLength) {
 
 
 exports.makeemail = async (req,res)=>{ 
-    console.log("hello makememail " + req.body.emailContent +" "+ req.body.emailContext);
+    console.log("hello makememail " + req.body.emailContent +" "+ req.body.emailContext+" "+ req.body.mailLength);
     const paramail = await main(req.body.emailContent, req.body.emailContext, req.body.mailLength);
     // String(paramail);
     res.send(paramail);
