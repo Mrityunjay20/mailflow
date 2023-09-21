@@ -28,4 +28,5 @@ router.get('/seemail',apiKeyMiddleware, draftEmail.seemail);
 
 
 router.post('/findauth',getAuth.findAuth);
+
 module.exports = router;

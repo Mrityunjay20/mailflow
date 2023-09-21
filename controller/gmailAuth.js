@@ -17,36 +17,6 @@ const SCOPES = [
 ];
 
 
-// async function getAuth(nemail){
-//     const auth = await authenticate({
-//         keyfilePath: path.join(__dirname,'credentials.json'),
-//         scopes: SCOPES,
-//     });
-//     const authInstance = new authPerm({
-//         email: nemail,
-//         authDets: auth
-//     });
-
-//     authInstance.save().then(savedAuth => {
-//         return true;
-//     })
-//     .catch(error => {
-//         return false;
-//     });
-
-// }
-
-// exports.findAuth = async(req,res) =>{
-//     const emailAuth = await authPerm.count({email:req.body.loginEmail});
-//     if(emailAuth != 0){
-//         res.send(await authPerm.find({email:req.body.loginEmail}));
-//     }
-//     else{
-//         let response = await getAuth(req.body.loginEmail)
-//         console.log(response);
-//     }
-// }
-
 async function getAuth(nemail) {
     const auth = await authenticate({
         keyfilePath: path.join(__dirname, 'credentials.json'),
