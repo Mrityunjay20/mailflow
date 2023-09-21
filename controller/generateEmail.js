@@ -12,14 +12,14 @@ const client = new DiscussServiceClient({
   authClient: new GoogleAuth().fromAPIKey(API_KEY),
 });
 
-async function main(mailbody,mailtone) {
+async function main(mailbody,mailtone, mailLength) {
   const result = await client.generateMessage({
     model: MODEL_NAME, // Required. The model to use to generate the result.
     temperature: 0.4, // Optional. Value `0.0` always uses the highest-probability result.
     candidateCount: 1, // Optional. The number of candidate results to generate.
     prompt: {
       // optional, preamble context to prime responses
-      context: `Write a formal email with its subject for the message content of 100 words and write it in a ${mailtone} tone`,
+      context: `Write a formal email with its subject for the message content of 100 words and write it in a ${mailtone} tone, word limit is ${mailLength}`,
         // context: "write a movie script of 10 dialoges",
       // Optional. Examples for further fine-tuning of responses.
         //       examples: [
@@ -44,7 +44,7 @@ async function main(mailbody,mailtone) {
 
 exports.makeemail = async (req,res)=>{ 
     console.log("hello makememail " + req.body.emailContent +" "+ req.body.emailContext);
-    const paramail = await main(req.body.emailContent, req.body.emailContext);
+    const paramail = await main(req.body.emailContent, req.body.emailContext, req.body.mailLength);
     // String(paramail);
     res.send(paramail);
     console.log(paramail);
