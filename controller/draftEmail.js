@@ -9,7 +9,7 @@ exports.saveDraft = async (req,res,next)=>{
         console.log(user.email);
         const numDraft = await saveEmails.count({email:user.email});
         if(numDraft>5){
-            console.log("you can only save upto 5 mails");
+            res.status('416').send("you can only save upto 5 mails");
         }else{
             const finalDraft = new saveEmails({
                 email: user.email,
@@ -38,7 +38,6 @@ exports.seemail = async(req,res,next)=>{
         res.send(retriveEmail);
     }
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
-        console.log(user);
         if (err) { return next(err) }
         if (!user) { return res.status(401).send("user not found")}
         else if(user){seemail(user)}
