@@ -35,15 +35,19 @@ async function getAuth(nemail) {
             return "error";
         });
 }
-
-exports.findAuth = async (req, res) => {
-    const emailAuth = await authPerm.count({ email: req.body.loginEmail });
+async function findAuth(userEmail){
+    const emailAuth = await authPerm.count({ email: userEmail });
     if (emailAuth !== 0) {
-        res.send(await authPerm.find({ email: req.body.loginEmail }));
+        const response = await authPerm.find({ email: userEmail });
+        return response;
     } else {
-        let response = await getAuth(req.body.loginEmail);
-        res.send(response);
+        let response = await getAuth(userEmail);
+        return (response);
     }
+}
+
+exports.saveToGmail = async(req,res) =>{
+    const auth = await findAuth(req.body.loginEmail);
 }
 
 

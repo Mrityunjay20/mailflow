@@ -33,7 +33,8 @@ router.post("/signup",apiKeyMiddleware,postSignup.postAddUser);
 router.post('/signin',apiKeyMiddleware, postSignup.postUserLogin);
 
 // router.get('/api_test',postSignup.post_apitest);
-router.post('/findauth',getAuth.findAuth);
+// router.post('/findauth',getAuth.findAuth);
+router.post('/savegdraft', getAuth.saveToGmail);
 
 module.exports = router;
 
