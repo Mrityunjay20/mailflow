@@ -45,6 +45,16 @@ async function findAuth(userEmail){
         return (response);
     }
 }
+exports.findAuth = async (req,res)=>{
+    const emailAuth = await authPerm.count({ email: req.body.loginEmail });
+    if (emailAuth !== 0) {
+        const response = await authPerm.find({ email: req.body.loginEmail });
+        return response;
+    } else {
+        let response = await getAuth(req.body.loginEmail );
+        return (response);
+    }
+}
 
 exports.saveToGmail = async(req,res) =>{
     const auth = await findAuth(req.body.loginEmail);
