@@ -21,12 +21,13 @@ router.post('/genemail', apiKeyMiddleware,makeEmail.makeemail);
 router.get('/finetest',(req,res)=>{
     res.sendFile(path.join(__dirname,'..','views','savedraft.html'));
 });
-router.post('/saveDraft',apiKeyMiddleware, draftEmail.saveDraft);
-// router.post('/fetchDraft',apiKeyMiddleware,draftEmail.seemail);
-router.get('/seemail',apiKeyMiddleware, draftEmail.seemail);
 
-router.post('/deleteDraft', draftEmail.deleteDraft);
-router.post('/updateDraft', draftEmail.updateDraft);
+
+
+router.post('/saveDraft',apiKeyMiddleware, draftEmail.saveDraft);
+router.get('/seemail',apiKeyMiddleware, draftEmail.seemail);
+router.post('/deleteDraft',apiKeyMiddleware, draftEmail.deleteDraft);
+router.post('/updateDraft',apiKeyMiddleware, draftEmail.updateDraft);
 
 
 module.exports = router;
