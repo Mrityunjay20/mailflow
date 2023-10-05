@@ -26,7 +26,7 @@ router.post('/saveDraft',apiKeyMiddleware, draftEmail.saveDraft);
 router.get('/seemail',apiKeyMiddleware, draftEmail.seemail);
 
 router.post('/deleteDraft', draftEmail.deleteDraft);
-
+router.post('/updateDraft', draftEmail.updateDraft);
 
 
 module.exports = router;

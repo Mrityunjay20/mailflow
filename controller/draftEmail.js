@@ -34,6 +34,18 @@ exports.saveDraft = async (req,res,next)=>{
       })(req, res, next);
 }
 
+exports.seemail = async(req,res,next)=>{
+    async function seemail(user){
+        const retriveEmail = await saveEmails.find({email:user.email});
+        res.send(retriveEmail);
+    }
+    passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
+        if (err) { return next(err) }
+        if (!user) { return res.status(401).send("user not found")}
+        else if(user){seemail(user)}
+    })(req, res, next);
+}
+
 exports.deleteDraft = async(req,res,next)=>{
     async function deleteDraft(user){
         res.send(await saveEmails.deleteOne({_id:req.body.id}).then(result=>{
@@ -50,15 +62,20 @@ exports.deleteDraft = async(req,res,next)=>{
     })(req, res, next);
 }
 
-exports.seemail = async(req,res,next)=>{
-    async function seemail(user){
-        const retriveEmail = await saveEmails.find({email:user.email});
-        res.send(retriveEmail);
+exports.updateDraft = async(req,res,next)=>{
+    let draftId = req.body.id;
+    let draftUpdate = {draftBody: req.body.update};
+    let filter = {_id: draftId};
+
+    async function updateDraft(user){
+        const doc = await saveEmails.updateOne(filter, draftUpdate);
     }
+
+
     passport.authenticate('jwt',{session:false}, function(err, user, info, status) {
         if (err) { return next(err) }
         if (!user) { return res.status(401).send("user not found")}
-        else if(user){seemail(user)}
+        else if(user){updateDraft(user)}
     })(req, res, next);
 }
 
