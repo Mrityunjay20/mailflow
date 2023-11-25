@@ -19,7 +19,7 @@ async function main(mailbody,mailtone, mailLength) {
     candidateCount: 1, // Optional. The number of candidate results to generate.
     prompt: {
       // optional, preamble context to prime responses
-      context: `Write a formal email with its subject for the message content of 100 words and write it in a ${mailtone} tone, word limit is ${mailLength}`,
+      context: `Write a ${mailtone} email , in ${mailLength} words.`,
         // context: "write a movie script of 10 dialoges",
       // Optional. Examples for further fine-tuning of responses.
         //       examples: [

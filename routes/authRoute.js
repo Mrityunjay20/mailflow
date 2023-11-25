@@ -28,9 +28,9 @@ router.get('/signin',(req,res)=>{
     res.status(200).sendFile(path.join(__dirname,'..','views','signin.html'))
 })
 
-router.post("/signup",apiKeyMiddleware,postSignup.postAddUser);
+router.post("/signup",postSignup.postAddUser);
 
-router.post('/signin',apiKeyMiddleware, postSignup.postUserLogin);
+router.post('/signin', postSignup.postUserLogin);
 
 // router.get('/api_test',postSignup.post_apitest);
 router.post('/findauth',getAuth.findAuth);
