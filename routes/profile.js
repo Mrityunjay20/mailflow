@@ -17,17 +17,17 @@ router.post('/dashboard', function(req, res, next) {
     })(req, res, next);
   });
 
-router.post('/genemail', apiKeyMiddleware,makeEmail.makeemail);
+router.post('/genemail',makeEmail.makeemail);
 router.get('/finetest',(req,res)=>{
     res.sendFile(path.join(__dirname,'..','views','savedraft.html'));
 });
 
 
 
-router.post('/saveDraft',apiKeyMiddleware, draftEmail.saveDraft);
-router.get('/seemail',apiKeyMiddleware, draftEmail.seemail);
-router.post('/deleteDraft',apiKeyMiddleware, draftEmail.deleteDraft);
-router.post('/updateDraft',apiKeyMiddleware, draftEmail.updateDraft);
+router.post('/saveDraft', draftEmail.saveDraft);
+router.get('/seemail', draftEmail.seemail);
+router.post('/deleteDraft', draftEmail.deleteDraft);
+router.post('/updateDraft', draftEmail.updateDraft);
 
 
 module.exports = router;
