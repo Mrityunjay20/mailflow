@@ -12,9 +12,11 @@ const apiKeyMiddleware = require('../middleware/apikeycheck');
 // const isValid = require('../middleware/apikeycheck');
 
 
-// router.get('/',(req,res)=>{
-//     res.send('home page');
-// });
+router.get('/',(req,res)=>{
+    console.log("coco")
+    res.send('home page');
+
+});
 
 // router.get('/signin',(req,res)=>{
 //     res.status(200).sendFile(path.join(__dirname,'..','views','signin.html'))
